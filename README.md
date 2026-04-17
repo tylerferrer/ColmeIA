@@ -1,26 +1,26 @@
 # ColmeIA - Suite de Testes E2E com Cypress
 
-Repositorio de testes automatizados criado para explorar comportamentos inconsistentes da aplicacao, evidenciar bugs e manter uma base de cobertura regressiva para funcionalidades criticas.
+Repositorio de testes automatizados criado para explorar comportamentos inconsistentes da aplicação, evidenciar bugs e manter uma base de cobertura regressiva para funcionalidades criticas.
 
 ## Objetivo
 
 Esta suite foi estruturada para:
 
-- identificar comportamentos inesperados na aplicacao
+- identificar comportamentos inesperados na aplicação
 - registrar bugs com cenarios reproduziveis e claros
-- manter cenarios de regressao para fluxos essenciais
+- manter cenarios de regressão para fluxos essenciais
 - facilitar a leitura tecnica da entrega por recrutadores, avaliadores e times de engenharia
 
 ## Estrategia de cobertura
 
-Os cenarios foram organizados com tags para separar o tipo de validacao:
+Os cenarios foram organizados com tags para separar o tipo de validação:
 
 - `@bug`: cenarios que evidenciam falhas observadas no sistema
 - `@regressao`: cenarios que protegem comportamentos esperados e fluxos criticos
 
 Areas cobertas:
 
-- autenticacao e validacoes de login
+- autenticação e validações de login
 - recuperacao de senha
 - navegacao pelo menu lateral
 - interacao com dropdown de candidato
@@ -62,21 +62,21 @@ cypress/
 
 | Modulo | Cenario | Evidencia esperada |
 | --- | --- | --- |
-| Login | mensagem de erro com credenciais validas | nao deve exibir erro quando o login for valido |
+| Login | mensagem de erro com credenciais validas | não deve exibir erro quando o login for valido |
 | Recuperacao de senha | link "Esqueceu sua senha" sem redirecionamento | deve abrir a pagina de recuperacao |
-| Menu lateral | botao nao fecha o painel ao segundo clique | deve alternar entre abrir e fechar |
+| Menu lateral | botao não fecha o painel ao segundo clique | deve alternar entre abrir e fechar |
 | Menu lateral | Colmeia Forms abre tela vazia | deve carregar conteudo util |
-| Candidato | dropdown nao executa acao apos selecao | deve responder a opcao escolhida |
+| Candidato | dropdown não executa acao apos selecao | deve responder a opcao escolhida |
 | Banco de dados | busca antecipa mensagem antes da pesquisa | so deve avaliar apos a acao de busca |
 | Banco de dados | botao de refresh limpa a base em vez de atualizar a listagem | deve apenas atualizar os dados sem remover registros |
-| Banco de dados | item arquivado nao aparece na tela de arquivados | deve estar visivel na area correta |
+| Banco de dados | item arquivado não aparece na tela de arquivados | deve estar visivel na area correta |
 
-### Cobertura de regressao
+### Cobertura de regressão
 
 | Modulo | Cenario | Objetivo |
 | --- | --- | --- |
-| Login | validacao de formato de email | garantir feedback de entrada invalida |
-| Login | validacao de dados invalidos | garantir bloqueio de autenticacao incorreta |
+| Login | validação de formato de email | garantir feedback de entrada invalida |
+| Login | validação de dados invalidos | garantir bloqueio de autenticação incorreta |
 | Menu lateral | abertura do menu | garantir acesso a navegacao lateral |
 | Banco de dados | criacao de registro | garantir persistencia e exibicao |
 | Banco de dados | exclusao de item | garantir remocao da listagem |
@@ -84,14 +84,14 @@ cypress/
 
 ## Observacoes de UX
 
-- o botao de refresh na tela de banco de dados comunica uma acao de atualizacao, mas o comportamento observado limpa a base. Isso representa um bug funcional e tambem um problema de UX, porque o efeito real nao corresponde ao que o controle sugere.
+- o botao de refresh na tela de banco de dados comunica uma acao de atualizacao, mas o comportamento observado limpa a base. Isso representa um bug funcional e tambem um problema de UX, porque o efeito real não corresponde ao que o controle sugere.
 
 ## Boas praticas aplicadas
 
 - cenarios escritos com foco em comportamento
-- separacao objetiva entre bug report e regressao
+- separacao objetiva entre bug report e regressão
 - naming orientado a negocio e leitura rapida
-- passos voltados a reproducao e validacao
+- passos voltados a reproducao e validação
 - estrutura pronta para evolucao com evidencias e pipeline CI
 
 ## Como executar
@@ -136,8 +136,8 @@ npx cypress run --spec cypress/e2e/features/banco_dados.feature
 
 Observacao sobre seletores:
 
-- a suite prioriza `data-testid` sempre que a aplicacao disponibiliza esse atributo
-- quando `data-testid` nao existe na interface, a estrategia adotada e usar atributos mais estaveis como `href`, `title`, `placeholder`, `type` e texto funcional de botoes, evitando ao maximo seletores posicionais
+- a suite prioriza `data-testid` sempre que a aplicação disponibiliza esse atributo
+- quando `data-testid` não existe na interface, a estrategia adotada e usar atributos mais estaveis como `href`, `title`, `placeholder`, `type` e texto funcional de botoes, evitando ao maximo seletores posicionais
 
 ## Padrao de reporte
 
@@ -155,7 +155,7 @@ Exemplo:
 
 > Titulo: Login exibe erro com credenciais validas
 >
-> Modulo: Autenticacao
+> Modulo: autenticação
 >
 > Passos: acessar login, informar credenciais validas, submeter formulario
 >

@@ -1,0 +1,13 @@
+{
+  "validUser": {
+    "email": "qa@test.com",
+    "password": "123456"
+  },
+  "invalidEmailFormat": {
+    "email": "12345"
+  },
+  "invalidUser": {
+    "email": "usuario-inexistente@test.com",
+    "password": "senha-incorreta"
+  }
+}

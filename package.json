@@ -7,11 +7,11 @@
     "test": "npx cypress run",
     "cy:open": "npx cypress open",
     "cy:run": "npx cypress run",
-    "cy:bug:login": "npx cypress run --spec cypress/e2e/features/login.feature --env TAGS='@bug'",
+    "cy:bug:login": "npx cypress run --spec cypress/e2e/features/login.feature --env TAGS=@bug",
     "cy:bug:recuperacao": "npx cypress run --spec cypress/e2e/features/recuperacao_senha.feature",
-    "cy:bug:menu": "npx cypress run --spec cypress/e2e/features/menu.feature --env TAGS='@bug'",
+    "cy:bug:menu": "npx cypress run --spec cypress/e2e/features/menu.feature --env TAGS=@bug",
     "cy:bug:candidato": "npx cypress run --spec cypress/e2e/features/candidato.feature",
-    "cy:bug:banco": "npx cypress run --spec cypress/e2e/features/banco_dados.feature --env TAGS='@bug'"
+    "cy:bug:banco": "npx cypress run --spec cypress/e2e/features/banco_dados.feature --env TAGS=@bug"
   },
   "keywords": [],
   "author": "",

@@ -1,3 +1,4 @@
+
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
 import BancoDadosPage from '../../pages/BancoDadosPage'
 import MenuPage from '../../pages/MenuPage'
@@ -102,4 +103,27 @@ Then('nao deve exibir o item arquivado na listagem de arquivados', () => {
   bancoDadosPage.archivedTitle().should('be.visible')
   bancoDadosPage.createdItemShouldNotExist().should('be.true')
   bancoDadosPage.archivedTableWithoutItems().should('be.true')
+})
+
+When('ele cria varios bancos de dados', () => {
+  bancoDadosPage.createItems(searchItems)
+  searchItems.forEach((nome) => {
+    bancoDadosPage.itemShouldExistInCurrentTable(nome)
+  })
+})
+
+When('ele navega para a tela de colmeia forms', () => {
+  menuPage.openMenu()
+  menuPage.colmeiaFormsLink().click()
+  dashboardPage.assertColmeiaFormsUrl()
+})
+
+When('ele retorna para a tela de banco de dados', () => {
+  menuPage.openMenu()
+  menuPage.bancoDeDadosLink().click()
+  dashboardPage.assertBancoDeDadosUrl()
+})
+
+Then('os bancos de dados criados nao deveriam ter sido limpos', () => {
+  bancoDadosPage.mainTableWithoutData().should('be.true')
 })

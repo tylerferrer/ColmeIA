@@ -68,18 +68,18 @@ cypress/
 
 ### Bugs identificados
 
-| Módulo               | Cenário                                           | Evidência esperada                                   |
-| -------------------- | ------------------------------------------------- | ---------------------------------------------------- |
-| Login                | Mensagem de erro com credenciais válidas          | Não deve exibir erro quando o login for válido       |
-| Recuperação de senha | Link "Esqueceu sua senha" sem redirecionamento    | Deve abrir a página de recuperação                   |
-| Menu lateral         | Botão não fecha o painel ao segundo clique        | Deve alternar entre abrir e fechar                   |
-| Menu lateral         | Colmeia Forms abre tela vazia                     | Deve carregar conteúdo útil                          |
-| Candidato            | Dropdown não executa ação após seleção            | Deve responder à opção escolhida                     |
-| Banco de dados       | Busca antecipa mensagem antes da pesquisa         | Deve avaliar apenas após a ação de busca             |
-| Banco de dados       | Botão de refresh limpa a base em vez de atualizar | Deve apenas atualizar os dados sem remover registros |
-| Banco de dados       | Item arquivado não aparece na tela de arquivados  | Deve estar visível na área correta                   |
+| Módulo               | Cenário                                                          | Evidência esperada                                                  |
+|----------------------|------------------------------------------------------------------|---------------------------------------------------------------------|
+| Login                | Mensagem de erro com credenciais válidas                         | Não deve exibir erro quando o login for válido                      |
+| Recuperação de senha | Link "Esqueceu sua senha" sem redirecionamento                   | Deve abrir a página de recuperação                                  |
+| Menu lateral         | Botão não fecha o painel ao segundo clique                       | Deve alternar entre abrir e fechar                                  |
+| Menu lateral         | Colmeia Forms abre tela vazia                                    | Deve carregar conteúdo útil                                         |
+| Candidato            | Dropdown não executa ação após seleção                           | Deve responder à opção escolhida                                    |
+| Banco de dados       | Busca antecipa mensagem antes da pesquisa                        | Deve avaliar apenas após a ação de busca                            |
+| Banco de dados       | Botão de refresh limpa a base em vez de atualizar                | Deve apenas atualizar os dados sem remover registros                |
+| Banco de dados       | Item arquivado não aparece na tela de arquivados                 | Deve estar visível na área correta                                  |
+| Banco de dados       | Dados criados são removidos ao navegar para outra tela e retornar| Os registros devem permanecer salvos após navegação entre páginas   |
 
----
 
 ### Cobertura de regressão
 
@@ -215,3 +215,219 @@ Cada bug deve ser documentado com:
 > **Esperado:** Autenticar sem mensagem de erro
 > **Obtido:** Sistema exibe erro e ainda assim permite acesso
 > **Severidade:** Alta
+
+##  Detalhamento dos bugs
+
+---
+
+###  Bug: Login exibe mensagem de erro mesmo com credenciais válidas
+
+**Módulo:** Autenticação
+
+**Passos para reprodução:**
+
+1. Acessar a página de login
+2. Informar email válido: `qa@test.com`
+3. Informar senha válida: `123456`
+4. Clicar no botão de login
+
+**Resultado esperado:**
+Usuário deve ser autenticado sem exibição de mensagens de erro
+
+**Resultado obtido:**
+Sistema exibe o modal com a mensagem *"Seu login está incorreto, quer continuar?"*
+
+**Severidade:** Alta
+**Prioridade:** Alta
+
+---
+
+###  Bug: Sistema permite login mesmo após indicar erro de credenciais
+
+**Módulo:** Autenticação
+
+**Passos para reprodução:**
+
+1. Acessar a página de login
+2. Informar credenciais válidas
+3. Clicar no botão de login
+4. No modal exibido, clicar em "Continuar"
+
+**Resultado esperado:**
+Sistema não deveria permitir autenticação após indicar erro de login
+
+**Resultado obtido:**
+Usuário é autenticado e redirecionado para a área logada mesmo após mensagem de erro
+
+**Severidade:** Crítica
+**Prioridade:** Alta
+
+---
+
+###  Bug: Link "Esqueceu sua senha" não realiza redirecionamento
+
+**Módulo:** Recuperação de senha
+
+**Passos para reprodução:**
+
+1. Acessar a página de login
+2. Clicar na opção "Esqueceu sua senha"
+
+**Resultado esperado:**
+Usuário deve ser redirecionado para a página de recuperação de senha
+
+**Resultado obtido:**
+Nenhum redirecionamento ocorre e o usuário permanece na tela de login
+
+**Severidade:** Média
+**Prioridade:** Média
+
+---
+
+###  Bug: Menu lateral não fecha ao clicar novamente
+
+**Módulo:** Navegação
+
+**Passos para reprodução:**
+
+1. Estar logado na aplicação
+2. Clicar no botão de menu lateral
+3. Clicar novamente no mesmo botão
+
+**Resultado esperado:**
+Menu lateral deve alternar entre aberto e fechado
+
+**Resultado obtido:**
+Menu permanece aberto após o segundo clique
+
+**Severidade:** Média
+**Prioridade:** Média
+
+---
+
+###  Bug: Colmeia Forms redireciona para tela sem conteúdo
+
+**Módulo:** Navegação
+
+**Passos para reprodução:**
+
+1. Estar logado na aplicação
+2. Abrir o menu lateral
+3. Clicar na opção "Colmeia Forms"
+
+**Resultado esperado:**
+Tela deve carregar conteúdo funcional relacionado à funcionalidade
+
+**Resultado obtido:**
+Tela é carregada sem conteúdo visível (tela vazia)
+
+**Severidade:** Média
+**Prioridade:** Média
+
+---
+
+###  Bug: Dropdown de candidato não executa ação
+
+**Módulo:** Dashboard
+
+**Passos para reprodução:**
+
+1. Estar logado na aplicação
+2. Localizar o dropdown de candidato no dashboard
+3. Clicar no dropdown
+4. Selecionar uma opção
+
+**Resultado esperado:**
+Sistema deve exibir opções e executar ação correspondente à seleção
+
+**Resultado obtido:**
+Nenhuma opção é exibida ou nenhuma ação é executada após interação
+
+**Severidade:** Média
+**Prioridade:** Média
+
+---
+
+###  Bug: Busca antecipa mensagem antes da execução
+
+**Módulo:** Banco de dados
+
+**Passos para reprodução:**
+
+1. Estar logado e acessar a tela de banco de dados
+2. Digitar "teste" no campo de busca
+
+**Resultado esperado:**
+Sistema deve aguardar ação de busca para exibir resultados
+
+**Resultado obtido:**
+Mensagem *"Nenhum resultado encontrado para 'teste'"* é exibida antes da execução da busca
+
+**Severidade:** Média
+**Prioridade:** Média
+
+---
+
+###  Bug: Botão de refresh remove dados da tabela
+
+**Módulo:** Banco de dados
+
+**Passos para reprodução:**
+
+1. Estar na tela de banco de dados
+2. Garantir que existe ao menos um item na lista
+3. Clicar no botão de refresh
+
+**Resultado esperado:**
+Sistema deve apenas atualizar a listagem mantendo os dados existentes
+
+**Resultado obtido:**
+Os dados são removidos da tabela após o refresh
+
+**Severidade:** Alta
+**Prioridade:** Alta
+
+---
+
+###  Bug: Item arquivado não aparece na tela de arquivados
+
+**Módulo:** Banco de dados
+
+**Passos para reprodução:**
+
+1. Estar na tela de banco de dados
+2. Criar um novo item
+3. Arquivar o item criado
+4. Acessar a tela de itens arquivados
+
+**Resultado esperado:**
+Item arquivado deve ser exibido na lista de arquivados
+
+**Resultado obtido:**
+Item não aparece na listagem de arquivados
+
+**Severidade:** Alta
+**Prioridade:** Alta
+
+### Bug: Dados do banco de dados são limpos ao navegar para Colmeia Forms e retornar
+
+**Módulo:** Banco de dados / Navegação
+
+**Passos para reprodução:**
+
+1. Estar logado na aplicação
+2. Acessar a tela de banco de dados
+3. Criar múltiplos registros na base
+4. Navegar para a tela "Colmeia Forms"
+5. Retornar para a tela de banco de dados
+
+**Resultado esperado:**
+Os registros criados anteriormente devem permanecer salvos e visíveis na listagem.
+
+**Resultado obtido:**
+Os registros previamente criados são removidos ao retornar para a tela de banco de dados.
+
+**Severidade:** Alta
+**Prioridade:** Alta
+
+---

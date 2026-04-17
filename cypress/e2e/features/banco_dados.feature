@@ -1,3 +1,4 @@
+
 @bancoDeDados
 Feature: Banco de dados
 
@@ -51,3 +52,10 @@ Feature: Banco de dados
     Given que existe um item criado e arquivado
     When ele acessa a tela de arquivados
     Then nao deve exibir o item arquivado na listagem de arquivados
+
+@bug @bancoDeDados
+  Scenario: Dados do banco de dados sao limpos ao navegar para Colmeia Forms e retornar
+    When ele cria varios bancos de dados
+    And ele navega para a tela de colmeia forms
+    And ele retorna para a tela de banco de dados
+    Then os bancos de dados criados nao deveriam ter sido limpos

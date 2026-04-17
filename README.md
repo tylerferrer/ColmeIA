@@ -99,6 +99,15 @@ cypress/
 * O botão de refresh na tela de banco de dados comunica uma ação de atualização, porém o comportamento observado limpa a base.
   Isso representa um bug funcional e também um problema de UX, pois o efeito real não corresponde ao que o controle sugere.
 
+* Após a realização de login com credenciais válidas, a tela inicial apresentada ao usuário não possui conteúdo visível.
+  Esse comportamento pode gerar estranheza, pois não há indicação clara de estado, direcionamento ou informação útil após a autenticação.
+
+  Do ponto de vista de experiência do usuário, espera-se que a tela inicial apresente ao menos:
+
+  * informações resumidas
+  * indicadores de status
+  * ou direcionamento para próximas ações dentro do sistema
+
 ---
 
 ## Boas práticas aplicadas

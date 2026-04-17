@@ -199,7 +199,8 @@ Cada bug deve ser documentado com:
 > **Obtido:** Sistema exibe erro e ainda assim permite acesso
 > **Severidade:** Alta
 >
-> ## 🐞 Detalhamento dos bugs
+
+## 🐞 Detalhamento dos bugs
 
 ---
 

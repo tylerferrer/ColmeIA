@@ -1,32 +1,38 @@
-# ColmeIA - Suite de Testes E2E com Cypress
+# ColmeIA - Suíte de Testes E2E com Cypress
 
-Repositorio de testes automatizados criado para explorar comportamentos inconsistentes da aplicação, evidenciar bugs e manter uma base de cobertura regressiva para funcionalidades criticas.
+Repositório de testes automatizados criado para explorar comportamentos inconsistentes da aplicação, evidenciar bugs e manter uma base de cobertura regressiva para funcionalidades críticas.
 
-## Objetivo
+---
 
-Esta suite foi estruturada para:
+## 📌 Objetivo
 
-- identificar comportamentos inesperados na aplicação
-- registrar bugs com cenarios reproduziveis e claros
-- manter cenarios de regressão para fluxos essenciais
-- facilitar a leitura tecnica da entrega por recrutadores, avaliadores e times de engenharia
+Esta suíte foi estruturada para:
 
-## Estrategia de cobertura
+* Identificar comportamentos inesperados na aplicação
+* Registrar bugs com cenários reproduzíveis e claros
+* Manter cenários de regressão para fluxos essenciais
+* Facilitar a leitura técnica da entrega por recrutadores, avaliadores e times de engenharia
 
-Os cenarios foram organizados com tags para separar o tipo de validação:
+---
 
-- `@bug`: cenarios que evidenciam falhas observadas no sistema
-- `@regressao`: cenarios que protegem comportamentos esperados e fluxos criticos
+## 🧠 Estratégia de cobertura
 
-Areas cobertas:
+Os cenários foram organizados com tags para separar o tipo de validação:
 
-- autenticação e validações de login
-- recuperacao de senha
-- navegacao pelo menu lateral
-- interacao com dropdown de candidato
-- operacoes da tela de banco de dados
+* `@bug`: cenários que evidenciam falhas observadas no sistema
+* `@regressao`: cenários que protegem comportamentos esperados e fluxos críticos
 
-## Estrutura dos arquivos
+### Áreas cobertas:
+
+* Autenticação e validações de login
+* Recuperação de senha
+* Navegação pelo menu lateral
+* Interação com dropdown de candidato
+* Operações da tela de banco de dados
+
+---
+
+## 📁 Estrutura dos arquivos
 
 ```text
 cypress/
@@ -56,65 +62,82 @@ cypress/
     `-- e2e.js
 ```
 
-## Mapa de cenarios
+---
 
-### Bugs identificados
+## 🧪 Mapa de cenários
 
-| Modulo | Cenario | Evidencia esperada |
-| --- | --- | --- |
-| Login | mensagem de erro com credenciais validas | não deve exibir erro quando o login for valido |
-| Recuperacao de senha | link "Esqueceu sua senha" sem redirecionamento | deve abrir a pagina de recuperacao |
-| Menu lateral | botao não fecha o painel ao segundo clique | deve alternar entre abrir e fechar |
-| Menu lateral | Colmeia Forms abre tela vazia | deve carregar conteudo util |
-| Candidato | dropdown não executa acao apos selecao | deve responder a opcao escolhida |
-| Banco de dados | busca antecipa mensagem antes da pesquisa | so deve avaliar apos a acao de busca |
-| Banco de dados | botao de refresh limpa a base em vez de atualizar a listagem | deve apenas atualizar os dados sem remover registros |
-| Banco de dados | item arquivado não aparece na tela de arquivados | deve estar visivel na area correta |
+### 🐞 Bugs identificados
 
-### Cobertura de regressão
+| Módulo               | Cenário                                           | Evidência esperada                                   |
+| -------------------- | ------------------------------------------------- | ---------------------------------------------------- |
+| Login                | Mensagem de erro com credenciais válidas          | Não deve exibir erro quando o login for válido       |
+| Recuperação de senha | Link "Esqueceu sua senha" sem redirecionamento    | Deve abrir a página de recuperação                   |
+| Menu lateral         | Botão não fecha o painel ao segundo clique        | Deve alternar entre abrir e fechar                   |
+| Menu lateral         | Colmeia Forms abre tela vazia                     | Deve carregar conteúdo útil                          |
+| Candidato            | Dropdown não executa ação após seleção            | Deve responder à opção escolhida                     |
+| Banco de dados       | Busca antecipa mensagem antes da pesquisa         | Deve avaliar apenas após a ação de busca             |
+| Banco de dados       | Botão de refresh limpa a base em vez de atualizar | Deve apenas atualizar os dados sem remover registros |
+| Banco de dados       | Item arquivado não aparece na tela de arquivados  | Deve estar visível na área correta                   |
 
-| Modulo | Cenario | Objetivo |
-| --- | --- | --- |
-| Login | validação de formato de email | garantir feedback de entrada invalida |
-| Login | validação de dados invalidos | garantir bloqueio de autenticação incorreta |
-| Menu lateral | abertura do menu | garantir acesso a navegacao lateral |
-| Banco de dados | criacao de registro | garantir persistencia e exibicao |
-| Banco de dados | exclusao de item | garantir remocao da listagem |
-| Banco de dados | arquivamento de item | garantir saida da lista principal |
+---
 
-## Observacoes de UX
+### 🔁 Cobertura de regressão
 
-- o botao de refresh na tela de banco de dados comunica uma acao de atualizacao, mas o comportamento observado limpa a base. Isso representa um bug funcional e tambem um problema de UX, porque o efeito real não corresponde ao que o controle sugere.
+| Módulo         | Cenário                       | Objetivo                                    |
+| -------------- | ----------------------------- | ------------------------------------------- |
+| Login          | Validação de formato de email | Garantir feedback de entrada inválida       |
+| Login          | Validação de dados inválidos  | Garantir bloqueio de autenticação incorreta |
+| Menu lateral   | Abertura do menu              | Garantir acesso à navegação lateral         |
+| Banco de dados | Criação de registro           | Garantir persistência e exibição            |
+| Banco de dados | Exclusão de item              | Garantir remoção da listagem                |
+| Banco de dados | Arquivamento de item          | Garantir saída da lista principal           |
 
-## Boas praticas aplicadas
+---
 
-- cenarios escritos com foco em comportamento
-- separacao objetiva entre bug report e regressão
-- naming orientado a negocio e leitura rapida
-- passos voltados a reproducao e validação
-- estrutura pronta para evolucao com evidencias e pipeline CI
+## 🎯 Observações de UX
 
-## Como executar
+* O botão de refresh na tela de banco de dados comunica uma ação de atualização, porém o comportamento observado limpa a base.
+  Isso representa um bug funcional e também um problema de UX, pois o efeito real não corresponde ao que o controle sugere.
 
-Instalacao das dependencias:
+---
+
+## ✅ Boas práticas aplicadas
+
+* Cenários escritos com foco em comportamento
+* Separação clara entre reporte de bugs e cobertura de regressão
+* Naming orientado ao negócio e leitura rápida
+* Passos voltados à reprodução e validação
+* Estrutura preparada para evolução com evidências e integração contínua (CI)
+
+---
+
+## ⚙️ Como executar
+
+### Instalação das dependências:
 
 ```bash
 npm install
 ```
 
-Execucao do Cypress em modo interativo:
+---
+
+### Execução do Cypress em modo interativo:
 
 ```bash
 npm run cy:open
 ```
 
-Execucao em modo headless:
+---
+
+### Execução em modo headless:
 
 ```bash
 npm run cy:run
 ```
 
-Execucao de cada feature principal de bug:
+---
+
+### Execução por grupos de bugs:
 
 ```bash
 npm run cy:bug:login
@@ -124,7 +147,9 @@ npm run cy:bug:candidato
 npm run cy:bug:banco
 ```
 
-Execucao direta por arquivo, quando quiser rodar uma feature especifica:
+---
+
+### Execução por feature específica:
 
 ```bash
 npx cypress run --spec cypress/e2e/features/login.feature
@@ -134,33 +159,42 @@ npx cypress run --spec cypress/e2e/features/candidato.feature
 npx cypress run --spec cypress/e2e/features/banco_dados.feature
 ```
 
-Observacao sobre seletores:
+---
 
-- a suite prioriza `data-testid` sempre que a aplicação disponibiliza esse atributo
-- quando `data-testid` não existe na interface, a estrategia adotada e usar atributos mais estaveis como `href`, `title`, `placeholder`, `type` e texto funcional de botoes, evitando ao maximo seletores posicionais
+## 🧩 Observação sobre seletores
 
-## Padrao de reporte
+* A suíte prioriza `data-testid` sempre que disponível
+* Na ausência desse atributo, são utilizados seletores mais estáveis como:
 
-Cada bug deve ser reportado com o seguinte formato:
+  * `href`
+  * `title`
+  * `placeholder`
+  * `type`
+  * textos funcionais de botões
 
-1. titulo objetivo do problema
-2. modulo afetado
-3. passos para reproducao
-4. resultado esperado
-5. resultado obtido
-6. severidade e prioridade
-7. evidencia do teste automatizado vinculado ao cenario
+Evita-se ao máximo o uso de seletores posicionais, visando maior robustez dos testes.
 
-Exemplo:
+---
 
-> Titulo: Login exibe erro com credenciais validas
->
-> Modulo: autenticação
->
-> Passos: acessar login, informar credenciais validas, submeter formulario
->
-> Esperado: autenticar sem mensagem de erro
->
-> Obtido: sistema exibe erro e ainda assim permite acesso
->
-> Severidade: alta
+## 📄 Padrão de reporte
+
+Cada bug deve ser documentado com:
+
+1. Título objetivo do problema
+2. Módulo afetado
+3. Passos para reprodução
+4. Resultado esperado
+5. Resultado obtido
+6. Severidade e prioridade
+7. Evidência do teste automatizado vinculado ao cenário
+
+---
+
+### 📌 Exemplo
+
+> **Título:** Login exibe erro com credenciais válidas
+> **Módulo:** Autenticação
+> **Passos:** Acessar login, informar credenciais válidas e submeter o formulário
+> **Esperado:** Autenticar sem mensagem de erro
+> **Obtido:** Sistema exibe erro e ainda assim permite acesso
+> **Severidade:** Alta

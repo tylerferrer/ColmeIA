@@ -164,9 +164,3 @@ Exemplo:
 > Obtido: sistema exibe erro e ainda assim permite acesso
 >
 > Severidade: alta
-
-## Observacoes finais
-
-Esta documentacao foi preparada para apresentar a automacao como uma entrega de QA com foco em analise, reproducao de falhas e organizacao profissional da cobertura funcional.
-
-Caso este projeto seja publicado no GitHub, inclua neste README o link publico do repositorio no topo da pagina para facilitar a validacao da entrega.

@@ -4,7 +4,7 @@ Repositório de testes automatizados criado para explorar comportamentos inconsi
 
 ---
 
-##  Objetivo
+## Objetivo
 
 Esta suíte foi estruturada para:
 
@@ -15,7 +15,7 @@ Esta suíte foi estruturada para:
 
 ---
 
-##  Estratégia de cobertura
+## Estratégia de cobertura
 
 Os cenários foram organizados com tags para separar o tipo de validação:
 
@@ -32,7 +32,7 @@ Os cenários foram organizados com tags para separar o tipo de validação:
 
 ---
 
-##  Estrutura dos arquivos
+## Estrutura dos arquivos
 
 ```text
 cypress/
@@ -64,9 +64,9 @@ cypress/
 
 ---
 
-##  Mapa de cenários
+## Mapa de cenários
 
-###  Bugs identificados
+### Bugs identificados
 
 | Módulo               | Cenário                                           | Evidência esperada                                   |
 | -------------------- | ------------------------------------------------- | ---------------------------------------------------- |
@@ -81,7 +81,7 @@ cypress/
 
 ---
 
-###  Cobertura de regressão
+### Cobertura de regressão
 
 | Módulo         | Cenário                       | Objetivo                                    |
 | -------------- | ----------------------------- | ------------------------------------------- |
@@ -94,14 +94,14 @@ cypress/
 
 ---
 
-##  Observações de UX
+## Observações de UX
 
 * O botão de refresh na tela de banco de dados comunica uma ação de atualização, porém o comportamento observado limpa a base.
   Isso representa um bug funcional e também um problema de UX, pois o efeito real não corresponde ao que o controle sugere.
 
 ---
 
-##  Boas práticas aplicadas
+## Boas práticas aplicadas
 
 * Cenários escritos com foco em comportamento
 * Separação clara entre reporte de bugs e cobertura de regressão
@@ -111,7 +111,15 @@ cypress/
 
 ---
 
-##  Como executar
+## Limitações do escopo de teste
+
+Devido à ausência de acesso completo à área do candidato na aplicação, não foi possível validar fluxos relacionados à finalização de sessão (logout).
+
+Dessa forma, os cenários desta suíte consideram apenas o fluxo de autenticação (login) e navegação interna após acesso ao sistema.
+
+---
+
+## Como executar
 
 ### Instalação das dependências:
 
@@ -161,7 +169,7 @@ npx cypress run --spec cypress/e2e/features/banco_dados.feature
 
 ---
 
-##  Observação sobre seletores
+## Observação sobre seletores
 
 * A suíte prioriza `data-testid` sempre que disponível
 * Na ausência desse atributo, são utilizados seletores mais estáveis como:
@@ -176,7 +184,7 @@ Evita-se ao máximo o uso de seletores posicionais, visando maior robustez dos t
 
 ---
 
-##  Padrão de reporte
+## Padrão de reporte
 
 Cada bug deve ser documentado com:
 
@@ -190,7 +198,7 @@ Cada bug deve ser documentado com:
 
 ---
 
-###  Exemplo
+### Exemplo
 
 > **Título:** Login exibe erro com credenciais válidas
 > **Módulo:** Autenticação
@@ -198,197 +206,3 @@ Cada bug deve ser documentado com:
 > **Esperado:** Autenticar sem mensagem de erro
 > **Obtido:** Sistema exibe erro e ainda assim permite acesso
 > **Severidade:** Alta
-
-##  Detalhamento dos bugs
-
----
-
-###  Bug: Login exibe mensagem de erro mesmo com credenciais válidas
-
-**Módulo:** Autenticação
-
-**Passos para reprodução:**
-
-1. Acessar a página de login
-2. Informar email válido: `qa@test.com`
-3. Informar senha válida: `123456`
-4. Clicar no botão de login
-
-**Resultado esperado:**
-Usuário deve ser autenticado sem exibição de mensagens de erro
-
-**Resultado obtido:**
-Sistema exibe o modal com a mensagem *"Seu login está incorreto, quer continuar?"*
-
-**Severidade:** Alta
-**Prioridade:** Alta
-
----
-
-###  Bug: Sistema permite login mesmo após indicar erro de credenciais
-
-**Módulo:** Autenticação
-
-**Passos para reprodução:**
-
-1. Acessar a página de login
-2. Informar credenciais válidas
-3. Clicar no botão de login
-4. No modal exibido, clicar em "Continuar"
-
-**Resultado esperado:**
-Sistema não deveria permitir autenticação após indicar erro de login
-
-**Resultado obtido:**
-Usuário é autenticado e redirecionado para a área logada mesmo após mensagem de erro
-
-**Severidade:** Crítica
-**Prioridade:** Alta
-
----
-
-###  Bug: Link "Esqueceu sua senha" não realiza redirecionamento
-
-**Módulo:** Recuperação de senha
-
-**Passos para reprodução:**
-
-1. Acessar a página de login
-2. Clicar na opção "Esqueceu sua senha"
-
-**Resultado esperado:**
-Usuário deve ser redirecionado para a página de recuperação de senha
-
-**Resultado obtido:**
-Nenhum redirecionamento ocorre e o usuário permanece na tela de login
-
-**Severidade:** Média
-**Prioridade:** Média
-
----
-
-###  Bug: Menu lateral não fecha ao clicar novamente
-
-**Módulo:** Navegação
-
-**Passos para reprodução:**
-
-1. Estar logado na aplicação
-2. Clicar no botão de menu lateral
-3. Clicar novamente no mesmo botão
-
-**Resultado esperado:**
-Menu lateral deve alternar entre aberto e fechado
-
-**Resultado obtido:**
-Menu permanece aberto após o segundo clique
-
-**Severidade:** Média
-**Prioridade:** Média
-
----
-
-###  Bug: Colmeia Forms redireciona para tela sem conteúdo
-
-**Módulo:** Navegação
-
-**Passos para reprodução:**
-
-1. Estar logado na aplicação
-2. Abrir o menu lateral
-3. Clicar na opção "Colmeia Forms"
-
-**Resultado esperado:**
-Tela deve carregar conteúdo funcional relacionado à funcionalidade
-
-**Resultado obtido:**
-Tela é carregada sem conteúdo visível (tela vazia)
-
-**Severidade:** Média
-**Prioridade:** Média
-
----
-
-###  Bug: Dropdown de candidato não executa ação
-
-**Módulo:** Dashboard
-
-**Passos para reprodução:**
-
-1. Estar logado na aplicação
-2. Localizar o dropdown de candidato no dashboard
-3. Clicar no dropdown
-4. Selecionar uma opção
-
-**Resultado esperado:**
-Sistema deve exibir opções e executar ação correspondente à seleção
-
-**Resultado obtido:**
-Nenhuma opção é exibida ou nenhuma ação é executada após interação
-
-**Severidade:** Média
-**Prioridade:** Média
-
----
-
-###  Bug: Busca antecipa mensagem antes da execução
-
-**Módulo:** Banco de dados
-
-**Passos para reprodução:**
-
-1. Estar logado e acessar a tela de banco de dados
-2. Digitar "teste" no campo de busca
-
-**Resultado esperado:**
-Sistema deve aguardar ação de busca para exibir resultados
-
-**Resultado obtido:**
-Mensagem *"Nenhum resultado encontrado para 'teste'"* é exibida antes da execução da busca
-
-**Severidade:** Média
-**Prioridade:** Média
-
----
-
-###  Bug: Botão de refresh remove dados da tabela
-
-**Módulo:** Banco de dados
-
-**Passos para reprodução:**
-
-1. Estar na tela de banco de dados
-2. Garantir que existe ao menos um item na lista
-3. Clicar no botão de refresh
-
-**Resultado esperado:**
-Sistema deve apenas atualizar a listagem mantendo os dados existentes
-
-**Resultado obtido:**
-Os dados são removidos da tabela após o refresh
-
-**Severidade:** Alta
-**Prioridade:** Alta
-
----
-
-###  Bug: Item arquivado não aparece na tela de arquivados
-
-**Módulo:** Banco de dados
-
-**Passos para reprodução:**
-
-1. Estar na tela de banco de dados
-2. Criar um novo item
-3. Arquivar o item criado
-4. Acessar a tela de itens arquivados
-
-**Resultado esperado:**
-Item arquivado deve ser exibido na lista de arquivados
-
-**Resultado obtido:**
-Item não aparece na listagem de arquivados
-
-**Severidade:** Alta
-**Prioridade:** Alta
-

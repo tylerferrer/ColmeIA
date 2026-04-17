@@ -6,6 +6,7 @@ import DashboardPage from '../../pages/DashboardPage'
 const bancoDadosPage = new BancoDadosPage()
 const menuPage = new MenuPage()
 const dashboardPage = new DashboardPage()
+const searchItems = ['alfa-banco', 'banco-especifico', 'omega-banco']
 
 Given('que o usuario esta na pagina de banco de dados', () => {
   menuPage.openMenu()
@@ -41,6 +42,15 @@ When('ele cria um novo registro', () => {
   bancoDadosPage.createItem()
 })
 
+When('ele cria alguns novos registros para busca', () => {
+  bancoDadosPage.createItems(searchItems)
+})
+
+When('ele pesquisa pelo nome de um item especifico criado', () => {
+  bancoDadosPage.typeSearch('banco-especifico')
+  bancoDadosPage.search()
+})
+
 When('ele tenta salvar um novo item sem preencher o nome', () => {
   bancoDadosPage.openCreateModal()
   bancoDadosPage.saveWithoutName()
@@ -73,6 +83,12 @@ Then('o item criado deve ser exibido na lista principal com as acoes disponiveis
   bancoDadosPage.createdItemArchiveButton().should('be.visible')
 })
 
+Then('deve exibir o item pesquisado na tabela', () => {
+  bancoDadosPage.itemShouldExistInCurrentTable('banco-especifico').should('be.visible')
+  bancoDadosPage.itemShouldNotExistInCurrentTable('alfa-banco').should('be.true')
+  bancoDadosPage.itemShouldNotExistInCurrentTable('omega-banco').should('be.true')
+})
+
 Then('deve exibir a mensagem de erro {string}', (message) => {
   bancoDadosPage.requiredNameError(message).should('be.visible')
 })
@@ -83,5 +99,7 @@ Then('a tabela principal deve permanecer sem dados', () => {
 })
 
 Then('nao deve exibir o item arquivado na listagem de arquivados', () => {
-  bancoDadosPage.emptyArchivedState().should('be.visible')
+  bancoDadosPage.archivedTitle().should('be.visible')
+  bancoDadosPage.createdItemShouldNotExist().should('be.true')
+  bancoDadosPage.archivedTableWithoutItems().should('be.true')
 })

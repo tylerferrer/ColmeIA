@@ -114,6 +114,31 @@ Execucao em modo headless:
 npm run cy:run
 ```
 
+Execucao de cada feature principal de bug:
+
+```bash
+npm run cy:bug:login
+npm run cy:bug:recuperacao
+npm run cy:bug:menu
+npm run cy:bug:candidato
+npm run cy:bug:banco
+```
+
+Execucao direta por arquivo, quando quiser rodar uma feature especifica:
+
+```bash
+npx cypress run --spec cypress/e2e/features/login.feature
+npx cypress run --spec cypress/e2e/features/recuperacao_senha.feature
+npx cypress run --spec cypress/e2e/features/menu.feature
+npx cypress run --spec cypress/e2e/features/candidato.feature
+npx cypress run --spec cypress/e2e/features/banco_dados.feature
+```
+
+Observacao sobre seletores:
+
+- a suite prioriza `data-testid` sempre que a aplicacao disponibiliza esse atributo
+- quando `data-testid` nao existe na interface, a estrategia adotada e usar atributos mais estaveis como `href`, `title`, `placeholder`, `type` e texto funcional de botoes, evitando ao maximo seletores posicionais
+
 ## Padrao de reporte
 
 Cada bug deve ser reportado com o seguinte formato:

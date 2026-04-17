@@ -23,6 +23,12 @@ Feature: Banco de dados
     When ele cria um novo registro
     Then o item criado deve ser exibido na lista principal com as acoes disponiveis
 
+  @regressao @busca
+  Scenario: Criar varios registros e pesquisar por um nome especifico
+    When ele cria alguns novos registros para busca
+    And ele pesquisa pelo nome de um item especifico criado
+    Then deve exibir o item pesquisado na tabela
+
   @bug @criacao
   Scenario: Exibir erro ao tentar salvar um item sem preencher o nome
     When ele tenta salvar um novo item sem preencher o nome

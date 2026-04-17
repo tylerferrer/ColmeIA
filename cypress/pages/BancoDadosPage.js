@@ -3,6 +3,7 @@ import bancoDadosElements from '../elements/bancoDados.elements'
 class BancoDadosPage {
   constructor() {
     this.lastCreatedItemName = null
+    this.createdItemNames = []
   }
 
   searchInput() {
@@ -14,7 +15,12 @@ class BancoDadosPage {
   }
 
   refreshButton() {
-    return cy.get(bancoDadosElements.refreshButton).eq(0)
+    return cy
+      .get(bancoDadosElements.iconButtons)
+      .filter((_, element) =>
+        Cypress.$(element).find(`path[d*="${bancoDadosElements.refreshIconPathFragment}"]`).length > 0
+      )
+      .first()
   }
 
   createButton() {
@@ -38,26 +44,36 @@ class BancoDadosPage {
   }
 
   emptyArchivedState() {
-    return cy.contains(
-      bancoDadosElements.emptyStateTargets,
-      bancoDadosElements.emptyDatabaseMessageText
-    )
+    return this.archivedTitle()
   }
 
   mainTableWithoutData() {
-    return cy.get('body').then(($body) => $body.find(bancoDadosElements.listItems).length === 0)
+    return cy.get(bancoDadosElements.resultsArea).then(($table) => {
+      const hasDeleteButtons = $table.find(bancoDadosElements.deleteItemButton).length > 0
+      const hasArchiveButtons = $table.find(bancoDadosElements.archiveItemButton).length > 0
+      const hasEmptyState = $table.text().includes('Nenhum banco de dados encontrado')
+      const hasRows = $table.find(bancoDadosElements.listItems).length > 0
+
+      return !hasDeleteButtons && !hasArchiveButtons && (!hasRows || hasEmptyState)
+    })
   }
 
-  deleteButton() {
-    return cy.get(bancoDadosElements.deleteItemButton).first()
-  }
+  archivedTableWithoutItems() {
+    return cy.get(bancoDadosElements.resultsArea).then(($table) => {
+      const hasDeleteButtons = $table.find(bancoDadosElements.deleteItemButton).length > 0
+      const hasArchiveButtons = $table.find(bancoDadosElements.archiveItemButton).length > 0
 
-  archiveButton() {
-    return cy.get(bancoDadosElements.archiveItemButton).first()
+      return !hasDeleteButtons && !hasArchiveButtons
+    })
   }
 
   archivedTab() {
-    return cy.get(bancoDadosElements.archivedButton).eq(1)
+    return cy
+      .get(bancoDadosElements.iconButtons)
+      .filter((_, element) =>
+        Cypress.$(element).find(`path[d*="${bancoDadosElements.archivedIconPathFragment}"]`).length > 0
+      )
+      .first()
   }
 
   resultsArea() {
@@ -82,12 +98,25 @@ class BancoDadosPage {
 
   createItem() {
     const itemName = `item-${Date.now()}`
+    return this.createItemWithName(itemName)
+  }
+
+  createItemWithName(itemName) {
     this.lastCreatedItemName = itemName
+    this.createdItemNames.push(itemName)
 
     this.openCreateModal()
     this.createModalTitle().should('be.visible')
     this.createItemInput().clear().type(itemName)
     this.saveButton().click()
+
+    return cy.wrap(itemName)
+  }
+
+  createItems(itemNames) {
+    itemNames.forEach((itemName) => {
+      this.createItemWithName(itemName)
+    })
   }
 
   createdItemRow() {
@@ -107,7 +136,22 @@ class BancoDadosPage {
   }
 
   createdItemShouldNotExist() {
-    return cy.get('body').then(($body) => !$body.text().includes(this.lastCreatedItemName))
+    return this.itemShouldNotExistInCurrentTable(this.lastCreatedItemName)
+  }
+
+  itemShouldExistInCurrentTable(itemName) {
+    return cy.contains(bancoDadosElements.tableCells, itemName)
+  }
+
+  itemShouldNotExistInCurrentTable(itemName) {
+    return cy.get('body').then(($body) => {
+      const cellsText = $body
+        .find(bancoDadosElements.tableCells)
+        .toArray()
+        .map((cell) => Cypress.$(cell).text().trim())
+
+      return !cellsText.includes(itemName)
+    })
   }
 
   openCreateModal() {
@@ -120,11 +164,11 @@ class BancoDadosPage {
   }
 
   deleteFirstItem() {
-    this.deleteButton().click()
+    this.createdItemDeleteButton().click()
   }
 
   archiveFirstItem() {
-    this.archiveButton().click()
+    this.createdItemArchiveButton().click()
   }
 
   openArchived() {
@@ -133,6 +177,10 @@ class BancoDadosPage {
 
   resultMessage(message) {
     return cy.contains(message, { matchCase: false })
+  }
+
+  archivedTitle() {
+    return cy.contains('h3', bancoDadosElements.archivedTitleText)
   }
 
 }

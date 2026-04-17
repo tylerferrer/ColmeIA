@@ -124,6 +124,6 @@ When('ele retorna para a tela de banco de dados', () => {
   dashboardPage.assertBancoDeDadosUrl()
 })
 
-Then('os bancos de dados criados nao deveriam ter sido limpos', () => {
+Then('os bancos de dados sao removidos indevidamente ao retornar para a tela', () => {
   bancoDadosPage.mainTableWithoutData().should('be.true')
 })

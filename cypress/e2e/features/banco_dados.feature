@@ -58,4 +58,4 @@ Feature: Banco de dados
     When ele cria varios bancos de dados
     And ele navega para a tela de colmeia forms
     And ele retorna para a tela de banco de dados
-    Then os bancos de dados criados nao deveriam ter sido limpos
+    Then os bancos de dados sao removidos indevidamente ao retornar para a tela
